@@ -1,0 +1,21 @@
+{
+    "name": "tournikoti/tourbillon-router",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gwennael Jean",
+            "email": "gwennael.jean@trsb.net"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.3.3",
+        "tournikoti/tourbillon-request": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tourbillon\\Router\\": "src"
+        }
+    }
+}
