@@ -10,13 +10,17 @@ class Router {
     
     private $request;
     
-    private $aRoute;
+    private $routes;
 
-    public function __construct(HttpRequest $request, $aRouteArray) {
+    public function __construct(HttpRequest $request) {
         $this->request = $request;
-        
-        foreach ($aRouteArray as $sName => $routeArray) {
-            $this->aRoute[] = new Route($sName, $routeArray);
+        $this->routes = array();
+    }
+
+    public function addRoutes(array $routes)
+    {
+        foreach ($routes as $name => $infos) {
+            $this->routes[] = new Route($name, $infos);
         }
     }
 
@@ -26,7 +30,7 @@ class Router {
      * @return Route
      */
     public function getByUrl($sUrl) {
-        foreach ($this->aRoute as $oRoute) {
+        foreach ($this->routes as $oRoute) {
             if ($this->match($sUrl, $oRoute)) {
                 return $oRoute;
             }
@@ -40,7 +44,7 @@ class Router {
      * @return Route
      */
     public function getByName($sName) {
-        foreach ($this->aRoute as $oRoute) {
+        foreach ($this->routes as $oRoute) {
             if ($sName === $oRoute->getName()) {
                 return $oRoute;
             }
