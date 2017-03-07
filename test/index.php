@@ -9,4 +9,6 @@ $httpRequest = new HttpRequest();
 
 $router = new Router($httpRequest, include './config/routes.php');
 
-var_dump($router->getByUrl(''));
+var_dump($router->getByUrl($httpRequest->getUrl()));
+
+var_dump($router->getByUrl($httpRequest->getBaseUrl() . 'profil/user1'));

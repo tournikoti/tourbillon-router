@@ -4,63 +4,63 @@ namespace Tourbillon\Router;
 
 class Route {
 
-    private $sName;
-    private $sUrl;
-    private $sController;
-    private $sAction;
-    private $aMatch;
-    private $aParam;
+    private $name;
+    private $url;
+    private $controller;
+    private $action;
+    private $matches;
+    private $params;
 
-    public function __construct($sName, $aInfo) {
-        $this->sName = $sName;
-        $this->sUrl = $aInfo['url'];
-        $this->sController = self::getControllerName($aInfo['controller']);
-        $this->sAction = self::getActionName($aInfo['action']);
-        $this->aMatch = isset($aInfo['params']) ? $aInfo['params'] : array();
-        $this->aParam = array();
+    public function __construct($name, $aInfo) {
+        $this->name = $name;
+        $this->url = $aInfo['url'];
+        $this->controller = $this->parseController($aInfo['controller']);
+        $this->action = $this->parseAction($aInfo['action']);
+        $this->matches = isset($aInfo['params']) ? $aInfo['params'] : array();
+        $this->params = array();
     }
 
     public function getName() {
-        return $this->sName;
+        return $this->name;
     }
     
     public function getUrl() {
-        return $this->sUrl;
+        return $this->url;
     }
     
     public function getController() {
-        return $this->sController;
+        return $this->controller;
     }
     
     public function getAction() {
-        return $this->sAction;
+        return $this->action;
     }
     
     public function getMatch() {
-        return $this->aMatch;
+        return $this->matches;
     }
     
     public function getParam() {
-        return $this->aParam;
+        return $this->params;
     }
     
-    public function setParam($sName, $mValue) {
-        $this->aParam[$sName] = $mValue;
+    public function setParam($name, $mValue) {
+        $this->params[$name] = $mValue;
     }
     
-    public function generate($aParam = array()) {
-        $sUrl = $this->sUrl;
-        foreach ($aParam as $key => $value) {
-            $sUrl = str_replace("(:$key)", $value, $sUrl);
+    public function generate($params = array()) {
+        $url = $this->url;
+        foreach ($params as $key => $value) {
+            $url = str_replace("(:$key)", $value, $url);
         }
-        return $sUrl;
+        return $url;
     }
     
-    public static function getControllerName($name) {
-        return 'app\\Controller\\' . str_replace("/", "\\", $name) . "Controller";
+    private function parseController($name) {
+        return str_replace("/", "\\", $name);
     }
     
-    public static function getActionName($name) {
-        return $name . "Action";
+    private function parseAction($name) {
+        return $name;
     }
 }
