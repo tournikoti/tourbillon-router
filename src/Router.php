@@ -25,6 +25,14 @@ class Router {
     }
 
     /**
+     * Retourne la route en fonction du HttpRequest
+     * @return Route
+     */
+    public function getByRequest() {
+        return $this->getByUrl($this->request->getUrl());
+    }
+
+    /**
      * Retourne la route correspondant a l'URL
      * @param string $sUrl
      * @return Route
