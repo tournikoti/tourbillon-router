@@ -12,9 +12,9 @@ class Router {
     
     private $routes;
 
-    public function __construct(HttpRequest $request) {
+    public function __construct(HttpRequest $request, array $routes = array()) {
         $this->request = $request;
-        $this->routes = array();
+        $this->routes = $this->addRoutes($routes);
     }
 
     public function addRoutes(array $routes)
