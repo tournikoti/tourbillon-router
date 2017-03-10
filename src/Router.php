@@ -14,7 +14,7 @@ class Router {
 
     public function __construct(HttpRequest $request, array $routes = array()) {
         $this->request = $request;
-        $this->routes = $this->addRoutes($routes);
+        $this->addRoutes($routes);
     }
 
     public function addRoutes(array $routes)
